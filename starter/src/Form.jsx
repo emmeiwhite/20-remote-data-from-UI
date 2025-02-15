@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import { useCustomItems } from './ItemsContext'
 
 const Form = () => {
-  const [newItemName, setNewItemName] = useState('');
+  const { handleFormSubmit, newItemName, setNewItemName } = useCustomItems()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (!newItemName) return
+
+    handleFormSubmit(newItemName)
+  }
   return (
     <form onSubmit={handleSubmit}>
       <h4>task bud</h4>
-      <div className='form-control'>
+      <div className="form-control">
         <input
-          type='text '
-          className='form-input'
+          type="text "
+          className="form-input"
           value={newItemName}
-          onChange={(event) => setNewItemName(event.target.value)}
+          onChange={event => setNewItemName(event.target.value)}
         />
-        <button type='submit' className='btn'>
+        <button
+          type="submit"
+          className="btn">
           add task
         </button>
       </div>
     </form>
-  );
-};
-export default Form;
+  )
+}
+export default Form

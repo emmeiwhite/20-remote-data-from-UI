@@ -1,9 +1,9 @@
-import { useItemsContext } from './ItemsContext'
+import { useCustomItems } from './ItemsContext'
 import SingleItem from './SingleItem'
 
 const Items = () => {
   // Avoiding prop-drilling with ContextAPI
-  const { items } = useItemsContext()
+  const { items } = useCustomItems()
   return (
     <div className="items">
       {items.map(item => {

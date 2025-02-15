@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { nanoid } from 'nanoid'
 // 1. This is our Context
-export const ItemsContext = createContext()
+const ItemsContext = createContext()
 
 // InitialState
 const defaultItems = [
@@ -13,14 +13,30 @@ const defaultItems = [
 
 function ItemsContextProvider({ children }) {
   const [items, setItems] = useState(defaultItems)
+  const [newItemName, setNewItemName] = useState('')
+
+  function handleFormSubmit(item) {
+    console.log('we are here')
+    const fullItem = {
+      id: nanoid(),
+      title: item,
+      isDone: false
+    }
+
+    console.log(fullItem)
+    setItems([...items, fullItem])
+  }
 
   const value = {
-    items: defaultItems
+    items,
+    handleFormSubmit,
+    newItemName,
+    setNewItemName
   }
 
   return <ItemsContext.Provider value={value}>{children}</ItemsContext.Provider>
 }
 
 // Custom hook to save few lines of
-export const useItemsContext = () => useContext(ItemsContext)
-export default ItemsContextProvider
+const useCustomItems = () => useContext(ItemsContext)
+export { useCustomItems, ItemsContextProvider }
