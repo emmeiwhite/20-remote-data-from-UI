@@ -1,27 +1,30 @@
+import { useState } from 'react'
+import { useCustomItems } from './ItemsContext'
+
 const SingleItem = ({ item }) => {
+  const { handleChecked } = useCustomItems()
+
   return (
-    <div className='single-item'>
+    <div className="single-item">
       <input
-        type='checkbox'
+        type="checkbox"
         checked={item.isDone}
-        onChange={() => console.log('edit task')}
+        onChange={e => handleChecked(e.target.checked, item.id)}
       />
       <p
         style={{
           textTransform: 'capitalize',
-          textDecoration: item.isDone && 'line-through',
-        }}
-      >
+          textDecoration: item.isDone && 'line-through'
+        }}>
         {item.title}
       </p>
       <button
-        className='btn remove-btn'
-        type='button'
-        onClick={() => console.log('delete task')}
-      >
+        className="btn remove-btn"
+        type="button"
+        onClick={() => console.log('delete task')}>
         delete
       </button>
     </div>
-  );
-};
-export default SingleItem;
+  )
+}
+export default SingleItem

@@ -16,22 +16,35 @@ function ItemsContextProvider({ children }) {
   const [newItemName, setNewItemName] = useState('')
 
   function handleFormSubmit(item) {
-    console.log('we are here')
     const fullItem = {
       id: nanoid(),
       title: item,
       isDone: false
     }
 
-    console.log(fullItem)
     setItems([...items, fullItem])
+
+    setNewItemName('')
+  }
+
+  function handleChecked(value, id) {
+    console.log(value, id)
+    const updatedItems = items.map(item => {
+      if (item.id === id) {
+        return { ...item, isDone: value }
+      }
+      return item
+    })
+
+    setItems(updatedItems)
   }
 
   const value = {
     items,
     handleFormSubmit,
     newItemName,
-    setNewItemName
+    setNewItemName,
+    handleChecked
   }
 
   return <ItemsContext.Provider value={value}>{children}</ItemsContext.Provider>
