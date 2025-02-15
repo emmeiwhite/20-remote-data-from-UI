@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useCustomItems } from './ItemsContext'
 
 const Form = () => {

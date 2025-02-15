@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useCustomItems } from './ItemsContext'
 
 const SingleItem = ({ item }) => {
-  const { handleChecked } = useCustomItems()
+  const { handleChecked, handleDelete } = useCustomItems()
 
   return (
     <div className="single-item">
@@ -21,7 +21,7 @@ const SingleItem = ({ item }) => {
       <button
         className="btn remove-btn"
         type="button"
-        onClick={() => console.log('delete task')}>
+        onClick={() => handleDelete(item.id)}>
         delete
       </button>
     </div>

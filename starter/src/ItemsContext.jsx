@@ -39,12 +39,19 @@ function ItemsContextProvider({ children }) {
     setItems(updatedItems)
   }
 
+  function handleDelete(id) {
+    setItems(prevItem => {
+      return prevItem.filter(item => item.id !== id)
+    })
+  }
+
   const value = {
     items,
     handleFormSubmit,
     newItemName,
     setNewItemName,
-    handleChecked
+    handleChecked,
+    handleDelete
   }
 
   return <ItemsContext.Provider value={value}>{children}</ItemsContext.Provider>
